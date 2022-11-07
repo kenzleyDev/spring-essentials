@@ -5,6 +5,7 @@ import com.devdojo.mapper.AnimeMapper;
 import com.devdojo.repository.AnimeRepository;
 import com.devdojo.requests.AnimePostRequestBody;
 import com.devdojo.requests.AnimePutRequestBody;
+import exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class AnimeService {
     public Anime findByIdOrThrowBadRequestException(long id) {
         return animeRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime ID not Found"));
+                .orElseThrow(() -> new BadRequestException("Anime ID not Found"));
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
