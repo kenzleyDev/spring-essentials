@@ -1,9 +1,8 @@
 package com.devdojo.repository;
 
 import com.devdojo.domain.Anime;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AnimeRepository {
-    List<Anime> listAll();
-}
+public interface AnimeRepository extends JpaRepository<Anime, Long> {}
