@@ -1,6 +1,7 @@
 package com.devdojo.service;
 
 import com.devdojo.domain.Anime;
+import com.devdojo.mapper.AnimeMapper;
 import com.devdojo.repository.AnimeRepository;
 import com.devdojo.requests.AnimePostRequestBody;
 import com.devdojo.requests.AnimePutRequestBody;
@@ -21,6 +22,10 @@ public class AnimeService {
         return animeRepository.findAll() ;
     }
 
+    public List<Anime> findByName(String name) {
+        return animeRepository.findByName(name) ;
+    }
+
     public Anime findByIdOrThrowBadRequestException(long id) {
         return animeRepository
                 .findById(id)
@@ -28,22 +33,18 @@ public class AnimeService {
     }
 
     public Anime save(AnimePostRequestBody animePostRequestBody) {
-        Anime anime = Anime.builder().name(animePostRequestBody.getName()).build();
-        return animeRepository.save(anime);
+        return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }
 
     public void delete(long id) {
         animeRepository.delete(findByIdOrThrowBadRequestException(id));
     }
 
-
     public void replace(AnimePutRequestBody animePutRequestBody) {
-        Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
-        Anime anime = Anime.builder()
-                .id(savedAnime.getId())
-                .name(animePutRequestBody.getName())
-                .build();
 
+        Anime savedAnime = findByIdOrThrowBadRequestException(animePutRequestBody.getId());
+        Anime anime = AnimeMapper.INSTANCE.toAnime(animePutRequestBody);
+        anime.setId(savedAnime.getId());
         animeRepository.save(anime);
     }
 }
