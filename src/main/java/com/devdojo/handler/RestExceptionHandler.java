@@ -1,8 +1,8 @@
 package com.devdojo.handler;
 
-import exception.BadRequestException;
-import exception.BadRequestExceptionDetails;
-import exception.ValidationExceptionDetails;
+import com.devdojo.exception.BadRequestException;
+import com.devdojo.exception.BadRequestExceptionDetails;
+import com.devdojo.exception.ValidationExceptionDetails;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

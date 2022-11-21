@@ -1,4 +1,4 @@
-package exception;
+package com.devdojo.exception;
 
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;

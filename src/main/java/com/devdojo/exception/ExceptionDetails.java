@@ -1,4 +1,4 @@
-package exception;
+package com.devdojo.exception;
 
 import lombok.Data;
 import lombok.experimental.SuperBuilder;

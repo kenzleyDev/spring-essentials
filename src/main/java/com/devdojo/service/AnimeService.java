@@ -5,11 +5,9 @@ import com.devdojo.mapper.AnimeMapper;
 import com.devdojo.repository.AnimeRepository;
 import com.devdojo.requests.AnimePostRequestBody;
 import com.devdojo.requests.AnimePutRequestBody;
-import exception.BadRequestException;
+import com.devdojo.exception.BadRequestException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
