@@ -7,6 +7,8 @@ import com.devdojo.service.AnimeService;
 import com.devdojo.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,9 @@ public class AnimeController {
     private final AnimeService animeService;
 
     @GetMapping(path = "/list")
-    public ResponseEntity<List<Anime>> listAnime() {
+    public ResponseEntity<Page<Anime>> listAnime(Pageable pageable) {
         log.info(dateUtil.formatLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
-        return new ResponseEntity<>(animeService.listAll(), HttpStatus.OK);
+        return new ResponseEntity<>(animeService.listAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
