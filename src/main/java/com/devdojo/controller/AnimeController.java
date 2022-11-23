@@ -23,18 +23,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnimeController {
 
-    private final DateUtil dateUtil;
     private final AnimeService animeService;
 
     @GetMapping(path = "/list")
     public ResponseEntity<Page<Anime>> listAnime(Pageable pageable) {
-        log.info(dateUtil.formatLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
         return new ResponseEntity<>(animeService.listAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<Anime>> listAll() {
-        log.info(dateUtil.formatLocalDateTimeToDataBaseStyle(LocalDateTime.now()));
         return new ResponseEntity<>(animeService.listAllNonPageable(), HttpStatus.OK);
     }
 
