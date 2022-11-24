@@ -24,6 +24,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
@@ -56,10 +61,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.24</version>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -77,7 +80,6 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
 	<profiles>
 		<profile>
 			<id>integration-tests</id>
@@ -89,6 +91,7 @@
 						<version>${maven-surefire-plugin.version}</version>
 						<configuration>
 							<includes>
+								<include>**/*Test.*</include>
 								<include>**/*IT.*</include>
 							</includes>
 						</configuration>
@@ -97,7 +100,6 @@
 			</build>
 		</profile>
 	</profiles>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -128,7 +130,7 @@
 
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<fork>true</fork>
 					<release>${java.version}</release>
