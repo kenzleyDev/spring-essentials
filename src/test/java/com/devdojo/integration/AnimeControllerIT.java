@@ -5,13 +5,10 @@ import com.devdojo.repository.AnimeRepository;
 import com.devdojo.requests.AnimePostRequestBody;
 import com.devdojo.util.AnimeCreator;
 import com.devdojo.util.AnimePostRequestBodyCreator;
-import com.devdojo.util.AnimePutRequestBodyCreator;
 import com.devdojo.wrapper.PageableResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.Collections;
 import java.util.List;
 
 
