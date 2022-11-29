@@ -135,7 +135,7 @@ class AnimeControllerTest {
     @DisplayName("save returns anime when successful")
     void save_ReturnsAnime_WhenSucessful() {
 
-        Anime anime = animeController.saveNewAnime(AnimePostRequestBodyCreator.createAnimePostRequestBody()).getBody();
+        Anime anime = animeController.save(AnimePostRequestBodyCreator.createAnimePostRequestBody()).getBody();
 
         Assertions.assertThat(anime).isEqualTo(AnimeCreator.createValidAnime());
     }

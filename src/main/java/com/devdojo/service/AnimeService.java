@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class AnimeService {
                 .orElseThrow(() -> new BadRequestException("Anime ID not Found"));
     }
 
+    @Transactional
     public Anime save(AnimePostRequestBody animePostRequestBody) {
         return animeRepository.save(AnimeMapper.INSTANCE.toAnime(animePostRequestBody));
     }

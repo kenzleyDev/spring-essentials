@@ -5,8 +5,13 @@ import com.devdojo.requests.AnimePostRequestBody;
 import com.devdojo.requests.AnimePutRequestBody;
 import com.devdojo.service.AnimeService;
 import com.devdojo.util.DateUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -29,7 +34,9 @@ public class AnimeController {
     private final AnimeService animeService;
 
     @GetMapping(path = "/list")
-    public ResponseEntity<Page<Anime>> listAnime(Pageable pageable) {
+    @Operation(summary = "List all animes paginated", description = "The default size is 20, use the parameter size to change the default value"
+    ,tags = {"anime"})
+    public ResponseEntity<Page<Anime>> listAnime(@ParameterObject Pageable pageable) {
         return new ResponseEntity<>(animeService.listAll(pageable), HttpStatus.OK);
     }
 
@@ -55,11 +62,15 @@ public class AnimeController {
     }
 
     @PostMapping(path = "/admin/new")
-    public ResponseEntity<Anime> saveNewAnime(@RequestBody @Valid AnimePostRequestBody animePostRequestBody) {
-       return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
+    public ResponseEntity<Anime> save(@RequestBody @Valid AnimePostRequestBody animePostRequestBody) {
+        return new ResponseEntity<>(animeService.save(animePostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/admin/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Successful Operation"),
+            @ApiResponse(responseCode = "400", description = "When Anime Does Not Exist in the Database"),
+    })
     public ResponseEntity<Void> delete(@PathVariable long id) {
         animeService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
